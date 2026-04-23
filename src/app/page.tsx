@@ -1,75 +1,78 @@
-import { Code, Cpu, Layout, Rocket, Server, ShieldCheck } from "lucide-react";
+import { Code, Database, Globe, Palette, Smartphone, Zap, CheckCircle2 } from "lucide-react";
+import { SkillCard } from "@/components/skill-card";
 
-const assignments = [
+const skills = [
   {
-    week: 1,
-    title: "Setup & Next.js Scaffolding",
-    description: "Initialize your project, configure tooling, and verify your AI-assisted workflow.",
-    icon: Rocket,
+    name: "React",
+    icon: <Smartphone className="h-8 w-8" />,
+    description: "Building interactive UIs with React and hooks",
   },
   {
-    week: 2,
-    title: "Agentic UI with Shadcn",
-    description: "Build dashboard layouts and reusable components with Shadcn/ui and Tailwind.",
-    icon: Layout,
+    name: "TypeScript",
+    icon: <Code className="h-8 w-8" />,
+    description: "Type-safe JavaScript development",
   },
   {
-    week: 3,
-    title: "Server Components & Data Fetching",
-    description: "Leverage React Server Components and async data patterns in the App Router.",
-    icon: Server,
+    name: "Tailwind CSS",
+    icon: <Palette className="h-8 w-8" />,
+    description: "Responsive design with utility-first CSS",
   },
   {
-    week: 4,
-    title: "AI-Driven Forms & Validation",
-    description: "Create forms with Zod schemas and Server Actions for type-safe data handling.",
-    icon: Code,
+    name: "Next.js",
+    icon: <Globe className="h-8 w-8" />,
+    description: "Full-stack web applications with App Router",
   },
   {
-    week: 5,
-    title: "Full-Stack Integration",
-    description: "Connect Supabase for authentication, database operations, and real-time data.",
-    icon: Cpu,
+    name: "JavaScript",
+    icon: <Zap className="h-8 w-8" />,
+    description: "Modern ES6+ JavaScript development",
   },
   {
-    week: 6,
-    title: "Deployment & AI Testing",
-    description: "Deploy to Vercel, set up webhooks, and write AI-assisted tests.",
-    icon: ShieldCheck,
+    name: "Web Development",
+    icon: <Database className="h-8 w-8" />,
+    description: "Front-end and full-stack web development",
   },
 ];
 
 export default function HomePage() {
   return (
     <div className="space-y-8">
-      <section className="space-y-2">
-        <h1 className="text-3xl font-bold tracking-tight">
-          Course Dashboard
-        </h1>
-        <p className="text-muted-foreground">
-          ITDEV-164 — Web Programming 2: AI-native full-stack development with
-          Next.js, Tailwind&nbsp;CSS, and Supabase.
+      <section className="space-y-4">
+        <div className="space-y-2">
+          <h1 className="text-4xl font-bold tracking-tight">Robert Ward</h1>
+          <p className="text-lg text-muted-foreground">
+            Web Development Student | Full-Stack Developer in Progress
+          </p>
+        </div>
+        <p className="text-base leading-relaxed text-foreground">
+          I am a passionate web development student learning to build modern,
+          AI-native full-stack applications using Next.js, TypeScript, and Tailwind CSS.
+          I'm focused on mastering both frontend and backend technologies to create
+          seamless user experiences and scalable web applications.
         </p>
       </section>
 
-      <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {assignments.map(({ week, title, description, icon: Icon }) => (
-          <div
-            key={week}
-            className="group rounded-lg border border-border bg-card p-5 transition-colors hover:border-primary/40"
-          >
-            <div className="mb-3 flex items-center gap-3">
-              <div className="flex h-9 w-9 items-center justify-center rounded-md bg-muted">
-                <Icon className="h-5 w-5 text-muted-foreground transition-colors group-hover:text-primary" />
-              </div>
-              <span className="text-xs font-medium tracking-wider text-muted-foreground uppercase">
-                Week {week}
-              </span>
-            </div>
-            <h2 className="mb-1 font-semibold leading-snug">{title}</h2>
-            <p className="text-sm text-muted-foreground">{description}</p>
-          </div>
-        ))}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-bold tracking-tight">Skills</h2>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {skills.map((skill) => (
+            <SkillCard
+              key={skill.name}
+              name={skill.name}
+              icon={skill.icon}
+              description={skill.description}
+            />
+          ))}
+        </div>
+      </section>
+
+      <section className="flex items-center justify-center pt-4">
+        <div className="flex items-center gap-2 rounded-lg bg-green-50 px-4 py-2 dark:bg-green-950">
+          <CheckCircle2 className="h-5 w-5 text-green-600 dark:text-green-400" />
+          <span className="text-sm font-medium text-green-700 dark:text-green-300">
+            Setup verified
+          </span>
+        </div>
       </section>
     </div>
   );
