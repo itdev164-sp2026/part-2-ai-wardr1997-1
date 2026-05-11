@@ -1,8 +1,9 @@
 "use client"
 
-import { ChevronRight, PanelLeftClose } from "lucide-react"
+import { PanelLeftClose } from "lucide-react"
 
 import { ModeToggle } from "@/components/mode-toggle"
+import { BreadcrumbNav } from "@/components/breadcrumb-nav"
 import { AppSidebar, AppSidebarDesktop } from "@/components/app-sidebar"
 import { SidebarInset, SidebarProvider, SidebarTrigger, SidebarMobile, SidebarMobileTrigger, useSidebar } from "@/components/ui/sidebar"
 import { Button } from "@/components/ui/button"
@@ -43,18 +44,10 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
 
         <SidebarInset>
           <header className="flex h-14 items-center justify-between border-b bg-background px-4">
-            <div className="flex items-center gap-3">
+<div className="flex items-center gap-3">
               {/* Single trigger that works for both mobile and desktop */}
               <SidebarMobileTrigger />
-              <nav aria-label="Breadcrumb" className="text-sm text-muted-foreground">
-                <ol className="flex items-center gap-2">
-                  <li className="font-medium text-foreground">Dashboard</li>
-                  <li>
-                    <ChevronRight className="h-4 w-4" />
-                  </li>
-                  <li>Overview</li>
-                </ol>
-              </nav>
+              <BreadcrumbNav />
             </div>
             <ModeToggle />
           </header>

@@ -17,13 +17,13 @@ import { cn } from "@/lib/utils"
 
 const navItems = [
   { title: "Overview", href: "/", icon: Home, active: true },
-  { title: "Projects", href: "#", icon: FolderOpen },
+  { title: "Projects", href: "/projects", icon: FolderOpen },
   { title: "Settings", href: "#", icon: Settings },
 ]
 
 const navItemsMobile = [
   { title: "Overview", href: "/" },
-  { title: "Projects", href: "#" },
+  { title: "Projects", href: "/projects" },
   { title: "Settings", href: "#" },
 ]
 

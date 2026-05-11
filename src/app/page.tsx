@@ -1,5 +1,9 @@
+import { createClient } from "@/lib/supabase/server";
+import { cookies } from "next/headers";
 import { Code, Database, Globe, Palette, Smartphone, Zap, CheckCircle2 } from "lucide-react";
 import { SkillCard } from "@/components/skill-card";
+
+export const dynamic = "force-dynamic";
 
 const skills = [
   {
@@ -34,9 +38,24 @@ const skills = [
   },
 ];
 
-export default function HomePage() {
+export default async function HomePage() {
+  const cookieStore = await cookies();
+  const supabase = createClient(cookieStore);
+
+  const { data: todos } = await supabase.from("todos").select();
+
   return (
     <div className="space-y-8">
+      {todos && todos.length > 0 && (
+        <section className="space-y-4">
+          <h2 className="text-2xl font-bold tracking-tight">Todos from Supabase</h2>
+          <ul>
+            {todos.map((todo) => (
+              <li key={todo.id}>{todo.name}</li>
+            ))}
+          </ul>
+        </section>
+      )}
       <section className="space-y-4">
         <div className="space-y-2">
           <h1 className="text-4xl font-bold tracking-tight">Robert Ward</h1>
