@@ -47,7 +47,7 @@ export default function HomePage() {
         <p className="text-base leading-relaxed text-foreground">
           I am a passionate web development student learning to build modern,
           AI-native full-stack applications using Next.js, TypeScript, and Tailwind CSS.
-          I'm focused on mastering both frontend and backend technologies to create
+I&apos;m focused on mastering both frontend and backend technologies to create
           seamless user experiences and scalable web applications.
         </p>
       </section>

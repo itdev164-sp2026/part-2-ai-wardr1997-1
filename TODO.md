@@ -1,0 +1,6 @@
+- [x] Add shadcn sidebar primitives in `src/components/ui/sidebar.tsx` (and minimal required ui deps)
+- [x] Create `src/components/app-sidebar.tsx` with Overview, Projects, Settings nav items and lucide icons
+- [x] Build dashboard shell with top breadcrumbs + mode toggle + main content slot
+- [x] Update `src/app/layout.tsx` to use `SidebarProvider` and new dashboard layout
+- [x] Verify `src/app/page.tsx` Developer Profile content remains unchanged in main area
+- [x] Add mobile-responsive sidebar with slide-out panel
