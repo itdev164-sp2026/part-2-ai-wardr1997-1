@@ -87,3 +87,54 @@
 
     I have mentioned my experiences in previous questions, I wouldn't do much but repeat those comments here.
     
+## Activity 3: Server-Side Data with Supabase
+
+### Prompt 1
+
+**What I asked:**
+
+> Using the Supabase client at src/lib/supabase.ts, create a new Server Component
+    at src/app/projects/page.tsx that:
+
+    1. Fetches all records from the "projects" table in Supabase
+    2. Displays them in a professional layout using shadcn/ui Card components
+    (run `npx shadcn@latest add card` if needed)
+    3. Each card should show the project title, description, and a status badge
+    4. The status badge should be color-coded:
+    - "active" = green
+    - "completed" = blue
+    - "archived" = gray
+
+    Use @workspace context to match the styling of our existing Dashboard.
+    This must be a React Server Component (async function, no "use client").
+    Do NOT use useEffect or useState for data fetching.
+
+
+**What happened:**
+
+    The agent required 0 assistance from me, it quickly completed the task efficiently and without issue.
+
+### Prompt 2
+
+**What I asked:**
+
+> The breadcrumb in src/app/layout.tsx always shows "Overview" because the page
+    name is hardcoded. Extract the breadcrumb into its own client component at
+    src/components/breadcrumb-nav.tsx that uses usePathname() from next/navigation
+    to display the correct page name. Map "/" to "Overview", "/projects" to
+    "Projects", and "/settings" to "Settings". Keep "ITDEV-164" as the first
+    breadcrumb segment. Then update layout.tsx to use the new component.
+
+
+**What happened:**
+
+> The agent made it say Projects without issue or changing the original page.
+
+### Reflection
+
+> How does fetching data on the server feel different from the useEffect
+> pattern you used in Web Programming 1? What are the advantages you
+> noticed? Did anything surprise you about how simple server-side
+> data fetching is in the App Router?
+
+    Fetching data on the server in the App Router feels much more direct and organized compared to the useEffect pattern from client-side React apps. In Web Programming 1, using useEffect usually meant creating loading states, managing async functions inside the component, handling errors manually, and sometimes dealing with multiple renders while data was loading. The component would first render empty content and then update after the fetch completed. With server-side data fetching in the App Router, the data is already available before the page is sent to the browser. 

@@ -37,7 +37,7 @@ export default async function ProjectsPage() {
   const cookieStore = await cookies();
   const supabase = createClient(cookieStore);
 
-  const { data: projects } = await supabase.from("projects").select();
+  const { data: projects } = await supabase.from("projects").select('*');
 
   return (
     <div className="space-y-6">
