@@ -138,3 +138,79 @@
 > data fetching is in the App Router?
 
     Fetching data on the server in the App Router feels much more direct and organized compared to the useEffect pattern from client-side React apps. In Web Programming 1, using useEffect usually meant creating loading states, managing async functions inside the component, handling errors manually, and sometimes dealing with multiple renders while data was loading. The component would first render empty content and then update after the fetch completed. With server-side data fetching in the App Router, the data is already available before the page is sent to the browser. 
+
+    ## Activity 4: AI-Driven Forms & Validation
+
+### Prompt 1
+
+**What I asked:**
+
+> Create a Zod validation schema in a new file src/lib/schemas.ts for a "Project"
+    with the following fields:
+
+    - title: string, minimum 3 characters, with a custom error message
+    "Title must be at least 3 characters"
+    - description: string, minimum 10 characters, with a custom error message
+    "Description must be at least 10 characters"
+    - status: enum with values "active", "completed", "archived"
+
+    Export the schema and also export the inferred TypeScript type using z.infer.
+
+
+**What happened:**
+
+> The agent had no issues with completing this tasks. It properly exported the schema, inferred the typescript from the schema using the Z.infer, error handling, and it matched the previous values from previous activities.
+
+### Prompt 2
+
+**What I asked:**
+
+> Using the Zod schema from src/lib/schemas.ts, do the following:
+
+    1. Create a form component at src/components/project-form.tsx that:
+    - Is a Client Component ("use client") because it uses react-hook-form hooks
+    - Uses react-hook-form with the zodResolver from @hookform/resolvers for validation
+    - Uses shadcn/ui Field, FieldLabel, and FieldError for field layout
+    - Uses shadcn/ui Input for title, Textarea for description, and Select for status
+    - Shows inline error messages under each field when validation fails
+    - Has a "Create Project" submit button
+    - Shows a sonner toast notification on successful submission
+
+    1. Create a Server Action at src/app/actions.ts that:
+    - Has "use server" at the top of the file
+    - Accepts the validated form data
+    - Validates it again with the Zod schema (server-side validation)
+    - Inserts the validated data into the Supabase "projects" table
+    - Returns a success or error response
+
+    1. Create a new page at src/app/projects/new/page.tsx that renders
+    the project form within the dashboard layout.
+
+    2. Add a "New Project" button to the existing projects page
+    (src/app/projects/page.tsx) that links to /projects/new.
+
+    Use @workspace to match the existing project styling.
+
+**What happened:**
+
+> The free agent could not handle multiple tasks at a time. It would freeze up and try to jump around often mixing up the code.
+> The paid agent although costly, handled multiple tasks with seemingly no effort.
+
+### Prompt 3 (if applicable)
+
+**What I asked:**
+
+> (Any follow-up prompt — fixing notifications, adding server-side
+> validation, or correcting form field behavior)
+
+**What happened:**
+
+> (Describe the result)
+
+### Reflection
+
+> How does the Schema-First approach with Zod change the way you think
+> about forms? How does it help prevent "junk data" from entering the
+> database? Compare this to how you handled form validation in
+> previous courses.
+    The Schema-First approach with Zod changes the way developers think about forms because the validation rules are created before the form is fully built, making the schema the main source of truth for what valid data should look like. Instead of treating validation as something added later with scattered if statements, the schema defines exactly what data is allowed, such as required fields, data types, formatting rules, and minimum or maximum values. This approach makes forms more organized and reliable because both the frontend and backend can use the same schema to validate data consistently. It also helps prevent “junk data” from entering the database because any invalid or incomplete information is rejected before it can be stored. For example, Zod can prevent invalid email formats, missing required fields, or incorrect data types from being submitted, which improves data quality and reduces errors in the application. In previous courses, form validation was usually handled with basic HTML validation or manual if statements inside the code. While that method worked for smaller projects, it often led to repetitive code and inconsistent validation between the frontend and backend. Using Zod is more efficient because all validation rules are centralized into one schema, making the application easier to maintain and reducing the chances of invalid data reaching the database. Strange how developers spent years manually checking every input field like exhausted mall security guards before finally deciding maybe the computer should enforce rules automatically.

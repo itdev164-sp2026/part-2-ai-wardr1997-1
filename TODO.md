@@ -3,4 +3,10 @@
 - [x] Build dashboard shell with top breadcrumbs + mode toggle + main content slot
 - [x] Update `src/app/layout.tsx` to use `SidebarProvider` and new dashboard layout
 - [x] Verify `src/app/page.tsx` Developer Profile content remains unchanged in main area
+
+- [ ] Fix `src/app/actions.ts` server validation response handling
+- [ ] Update `src/components/project-form.tsx` with RHF + zodResolver + shadcn Field/Input/Textarea/Select + toast
+- [ ] Create `src/app/projects/new/page.tsx` to render ProjectForm
+- [ ] Add "New Project" button linking to `/projects/new` in `src/app/projects/page.tsx`
+- [ ] Run type check
 - [x] Add mobile-responsive sidebar with slide-out panel
