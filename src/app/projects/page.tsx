@@ -1,5 +1,8 @@
+import Link from "next/link";
+import { Plus } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { cookies } from "next/headers";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -41,11 +44,19 @@ export default async function ProjectsPage() {
 
   return (
     <div className="space-y-6">
-      <div className="space-y-2">
-        <h1 className="text-3xl font-bold tracking-tight">Projects</h1>
-        <p className="text-muted-foreground">
-          View and manage your projects
-        </p>
+      <div className="flex items-start justify-between gap-4">
+        <div className="space-y-2">
+          <h1 className="text-3xl font-bold tracking-tight">Projects</h1>
+          <p className="text-muted-foreground">
+            View and manage your projects
+          </p>
+        </div>
+        <Button asChild>
+          <Link href="/projects/new" className="inline-flex items-center gap-2">
+            <Plus className="h-4 w-4" />
+            New Project
+          </Link>
+        </Button>
       </div>
 
       {projects && projects.length > 0 ? (
