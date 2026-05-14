@@ -1,7 +1,6 @@
 "use server"
 
-import { createClient } from "@/lib/supabase/server"
-import { cookies } from "next/headers"
+import { createActionSupabaseClient } from "@/lib/supabase/action"
 import { projectSchema, type Project } from "@/lib/schemas"
 
 type ActionResult = {
@@ -27,8 +26,7 @@ export async function createProject(data: unknown): Promise<ActionResult> {
   const validatedData: Project = validationResult.data
 
   // Insert the validated data into the Supabase "projects" table
-  const cookieStore = await cookies()
-  const supabase = createClient(cookieStore)
+  const supabase = await createActionSupabaseClient()
 
   const { error } = await supabase.from("projects").insert([
     {

@@ -214,3 +214,69 @@
 > database? Compare this to how you handled form validation in
 > previous courses.
     The Schema-First approach with Zod changes the way developers think about forms because the validation rules are created before the form is fully built, making the schema the main source of truth for what valid data should look like. Instead of treating validation as something added later with scattered if statements, the schema defines exactly what data is allowed, such as required fields, data types, formatting rules, and minimum or maximum values. This approach makes forms more organized and reliable because both the frontend and backend can use the same schema to validate data consistently. It also helps prevent “junk data” from entering the database because any invalid or incomplete information is rejected before it can be stored. For example, Zod can prevent invalid email formats, missing required fields, or incorrect data types from being submitted, which improves data quality and reduces errors in the application. In previous courses, form validation was usually handled with basic HTML validation or manual if statements inside the code. While that method worked for smaller projects, it often led to repetitive code and inconsistent validation between the frontend and backend. Using Zod is more efficient because all validation rules are centralized into one schema, making the application easier to maintain and reducing the chances of invalid data reaching the database. Strange how developers spent years manually checking every input field like exhausted mall security guards before finally deciding maybe the computer should enforce rules automatically.
+
+## Activity 5: Securing the App with Supabase Auth
+
+### Prompt 1
+
+**What I asked:**
+
+> Implement a complete email/password authentication flow for this Next.js 15
+    App Router project using @supabase/ssr. Here is what I need:
+
+    1. SUPABASE CLIENTS: Create server-side Supabase client utilities in
+     src/lib/supabase/ that work correctly with Next.js cookies. I need
+    separate clients for Server Components, Server Actions, and Middleware.
+
+    2. LOGIN PAGE: Create a page at src/app/(auth)/login/page.tsx with a
+    shadcn/ui card-based login form. It should support both "Sign In"
+    and "Sign Up" (toggle between them or use tabs). Handle the auth
+    via Server Actions, not client-side fetch.
+
+    3. MIDDLEWARE: Create a middleware.ts file at src/middleware.ts (next to
+    the app directory — Next.js looks for middleware as a sibling of app)
+    that:
+    - Refreshes the user's auth session on every request
+    - Protects the /projects routes — redirect unauthenticated users to /login
+    - Allows unauthenticated access to /login
+    - Uses supabase.auth.getUser() (NOT getSession()) for verification
+
+    1. SIGN OUT: Add a "Sign Out" button to the existing sidebar component
+    (src/components/app-sidebar.tsx) that calls a Server Action to sign
+    the user out and redirect to /login. The button must only render
+    when an authenticated user is present — pass the user as a prop from
+    the root layout (which will need to fetch it via the server Supabase
+    client) and gate the Sign Out UI on that prop.
+
+    2. UPDATE DATA QUERIES: Modify the projects page and the create-project
+    Server Action to use the authenticated Supabase client so that RLS
+    policies filter data per user.
+
+    Use @workspace to understand the existing project structure. Do not remove
+    or break existing functionality — integrate auth around it.
+
+
+**What happened:**
+
+> I gave the agent the context files, then the prompt, and it took off. It read the files and then clarified its understanding before creating a game plan.. It asked me if I was okay with the plan it had created and then it proceeded to complete it in a total of 3 phases, asking me if for my feedback after file creation.
+
+### Prompt 2
+
+**What I asked:**
+
+> (Paste any follow-up — fixing the redirect after login, correcting
+> getSession vs getUser, handling middleware route matching, etc.)
+
+**What happened:**
+
+> (Describe the fix and what you learned)
+
+### Reflection
+
+> How did the Agent handle the creation of middleware.ts? Did you have
+> to manually add files to the Working Set for context? What surprised
+> you about how many files needed to change to add authentication?
+> How does middleware-based auth compare to checking login status
+> inside each page component?
+
+    The Agent handled the creation of the middleware.ts file without any major problems. It automatically created and updated the files needed for authentication and fixed any errors on its own without asking me for help. I did not have to manually add files to the Working Set because the Agent was able to understand the project structure and make the needed changes automatically. What surprised me most was how many files had to change just to add authentication. I originally thought it would only affect the login page, but authentication connects to many parts of the application, such as routes, protected pages, sessions, and API requests. Middleware-based authentication is better than checking login status inside every page because the middleware acts like a security guard that checks users before they can access protected pages. This keeps the code cleaner and avoids repeating the same login checks throughout the project. Checking login status inside each page would require writing the same logic over and over again, which would make the project harder to manage. Web development really enjoys taking a feature that sounds simple and spreading it across the entire project like glitter in a carpet.

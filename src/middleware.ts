@@ -1,50 +1,30 @@
-import { createServerClient } from "@supabase/ssr";
-import { type NextRequest, NextResponse } from "next/server";
+import { NextResponse, type NextRequest } from "next/server"
+import { createMiddlewareSupabaseClient } from "@/lib/supabase/middleware"
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+export async function middleware(request: NextRequest) {
+  const { supabase, response } = createMiddlewareSupabaseClient(request)
 
-export function middleware(request: NextRequest) {
-  // Create an unmodified response
-  let supabaseResponse = NextResponse.next({
-    request: {
-      headers: request.headers,
-    },
-  });
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
 
-  const supabase = createServerClient(
-    supabaseUrl!,
-    supabaseKey!,
-    {
-      cookies: {
-        getAll() {
-          return request.cookies.getAll()
-        },
-        setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value, options }) => request.cookies.set(name, value))
-          supabaseResponse = NextResponse.next({
-            request,
-          })
-          cookiesToSet.forEach(({ name, value, options }) =>
-            supabaseResponse.cookies.set(name, value, options)
-          )
-        },
-      },
-    },
-  );
+  const { pathname } = request.nextUrl
+  const isProjectsRoute = pathname === "/projects" || pathname.startsWith("/projects/")
+  const isLoginRoute = pathname === "/login"
 
-  return supabaseResponse
+  if (isProjectsRoute && !user) {
+    const loginUrl = new URL("/login", request.url)
+    return NextResponse.redirect(loginUrl)
+  }
+
+  if (isLoginRoute && user) {
+    const projectsUrl = new URL("/projects", request.url)
+    return NextResponse.redirect(projectsUrl)
+  }
+
+  return response
 }
 
 export const config = {
-  matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     * - public folder
-     */
-    '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|pdf)$).*)',
-  ],
-};
+  matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],
+}

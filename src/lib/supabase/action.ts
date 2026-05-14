@@ -4,7 +4,7 @@ import { cookies } from "next/headers"
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
 
-export async function createServerSupabaseClient() {
+export async function createActionSupabaseClient() {
   const cookieStore = await cookies()
 
   return createServerClient(supabaseUrl!, supabaseKey!, {
@@ -13,13 +13,9 @@ export async function createServerSupabaseClient() {
         return cookieStore.getAll()
       },
       setAll(cookiesToSet) {
-        try {
-          cookiesToSet.forEach(({ name, value, options }) =>
-            cookieStore.set(name, value, options)
-          )
-        } catch {
-          // Can be ignored in Server Components when middleware is refreshing sessions.
-        }
+        cookiesToSet.forEach(({ name, value, options }) =>
+          cookieStore.set(name, value, options)
+        )
       },
     },
   })
