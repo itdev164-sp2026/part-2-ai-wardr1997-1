@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { Plus } from "lucide-react";
-import { createClient } from "@/lib/supabase/server";
-import { cookies } from "next/headers";
+import { createServerSupabaseClient } from "@/lib/supabase/server";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -37,10 +36,11 @@ function StatusBadge({ status }: { status: string }) {
 }
 
 export default async function ProjectsPage() {
-  const cookieStore = await cookies();
-  const supabase = createClient(cookieStore);
+  const supabase = await createServerSupabaseClient();
 
-  const { data: projects } = await supabase.from("projects").select('*');
+  const { data: projects } = await supabase
+    .from("projects")
+    .select("*");
 
   return (
     <div className="space-y-6">
@@ -61,7 +61,7 @@ export default async function ProjectsPage() {
 
       {projects && projects.length > 0 ? (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project) => (
+          {projects.map((project: Project) => (
             <Card key={project.id}>
               <CardHeader>
                 <div className="flex items-center justify-between">

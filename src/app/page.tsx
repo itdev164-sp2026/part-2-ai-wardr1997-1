@@ -1,5 +1,4 @@
-import { createClient } from "@/lib/supabase/server";
-import { cookies } from "next/headers";
+import { createServerSupabaseClient } from "@/lib/supabase/server";
 import { Code, Database, Globe, Palette, Smartphone, Zap, CheckCircle2 } from "lucide-react";
 import { SkillCard } from "@/components/skill-card";
 
@@ -39,8 +38,7 @@ const skills = [
 ];
 
 export default async function HomePage() {
-  const cookieStore = await cookies();
-  const supabase = createClient(cookieStore);
+  const supabase = await createServerSupabaseClient();
 
   const { data: todos } = await supabase.from("todos").select();
 

@@ -1,12 +1,8 @@
-- [x] Add shadcn sidebar primitives in `src/components/ui/sidebar.tsx` (and minimal required ui deps)
-- [x] Create `src/components/app-sidebar.tsx` with Overview, Projects, Settings nav items and lucide icons
-- [x] Build dashboard shell with top breadcrumbs + mode toggle + main content slot
-- [x] Update `src/app/layout.tsx` to use `SidebarProvider` and new dashboard layout
-- [x] Verify `src/app/page.tsx` Developer Profile content remains unchanged in main area
-
-- [ ] Fix `src/app/actions.ts` server validation response handling
-- [ ] Update `src/components/project-form.tsx` with RHF + zodResolver + shadcn Field/Input/Textarea/Select + toast
-- [ ] Create `src/app/projects/new/page.tsx` to render ProjectForm
-- [ ] Add "New Project" button linking to `/projects/new` in `src/app/projects/page.tsx`
-- [ ] Run type check
-- [x] Add mobile-responsive sidebar with slide-out panel
+- [x] Refactor Supabase server clients for Server Components, Server Actions, and Middleware
+- [x] Create root middleware at `src/middleware.ts` to refresh auth and protect `/projects`
+- [x] Create login server actions at `src/app/(auth)/login/actions.ts`
+- [x] Create login page at `src/app/(auth)/login/page.tsx` with Sign In / Sign Up UI
+- [x] Add sign-out server action and wire Sign Out button in sidebar (gated by authenticated user)
+- [x] Update root layout to fetch authenticated user and pass to dashboard shell/sidebar
+- [x] Update projects query and create-project action to use authenticated Supabase clients
+- [ ] Run build verification (`npm run build`)

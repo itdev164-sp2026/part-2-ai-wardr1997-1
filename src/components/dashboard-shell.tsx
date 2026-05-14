@@ -1,5 +1,6 @@
 "use client"
 
+import type { User } from "@supabase/supabase-js"
 import { PanelLeftClose } from "lucide-react"
 
 import { ModeToggle } from "@/components/mode-toggle"
@@ -8,7 +9,7 @@ import { AppSidebar, AppSidebarDesktop } from "@/components/app-sidebar"
 import { SidebarInset, SidebarProvider, SidebarTrigger, SidebarMobile, SidebarMobileTrigger, useSidebar } from "@/components/ui/sidebar"
 import { Button } from "@/components/ui/button"
 
-function MobileSidebarWithClose() {
+function MobileSidebarWithClose({ user }: { user: User | null }) {
   const { setMobileOpen } = useSidebar()
   
   return (
@@ -26,21 +27,27 @@ function MobileSidebarWithClose() {
           </Button>
         </div>
         {/* Sidebar content (text-based, no icons) */}
-        <AppSidebar />
+        <AppSidebar user={user} />
       </div>
     </SidebarMobile>
   )
 }
 
-export function DashboardShell({ children }: { children: React.ReactNode }) {
+export function DashboardShell({
+  children,
+  user,
+}: {
+  children: React.ReactNode
+  user: User | null
+}) {
   return (
     <SidebarProvider>
       <div className="flex min-h-screen w-full bg-muted/20">
         {/* Mobile sidebar */}
-        <MobileSidebarWithClose />
-        
+        <MobileSidebarWithClose user={user} />
+
         {/* Desktop sidebar */}
-        <AppSidebarDesktop />
+        <AppSidebarDesktop user={user} />
 
         <SidebarInset>
           <header className="flex h-14 items-center justify-between border-b bg-background px-4">
