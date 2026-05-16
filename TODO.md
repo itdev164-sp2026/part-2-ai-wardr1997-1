@@ -1,8 +1,4 @@
-- [x] Refactor Supabase server clients for Server Components, Server Actions, and Middleware
-- [x] Create root middleware at `src/middleware.ts` to refresh auth and protect `/projects`
-- [x] Create login server actions at `src/app/(auth)/login/actions.ts`
-- [x] Create login page at `src/app/(auth)/login/page.tsx` with Sign In / Sign Up UI
-- [x] Add sign-out server action and wire Sign Out button in sidebar (gated by authenticated user)
-- [x] Update root layout to fetch authenticated user and pass to dashboard shell/sidebar
-- [x] Update projects query and create-project action to use authenticated Supabase clients
-- [ ] Run build verification (`npm run build`)
+- [x] Create `tests/auth.spec.ts` with 3 E2E auth tests using accessible locators
+- [x] Add env-based credential handling with clear skip behavior for credentialed tests
+- [x] Use robust async waiting (`waitForURL`, visibility assertions) for navigation and load states
+- [ ] (Optional) Run `npx playwright test tests/auth.spec.ts`
