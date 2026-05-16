@@ -280,3 +280,71 @@
 > inside each page component?
 
     The Agent handled the creation of the middleware.ts file without any major problems. It automatically created and updated the files needed for authentication and fixed any errors on its own without asking me for help. I did not have to manually add files to the Working Set because the Agent was able to understand the project structure and make the needed changes automatically. What surprised me most was how many files had to change just to add authentication. I originally thought it would only affect the login page, but authentication connects to many parts of the application, such as routes, protected pages, sessions, and API requests. Middleware-based authentication is better than checking login status inside every page because the middleware acts like a security guard that checks users before they can access protected pages. This keeps the code cleaner and avoids repeating the same login checks throughout the project. Checking login status inside each page would require writing the same logic over and over again, which would make the project harder to manage. Web development really enjoys taking a feature that sounds simple and spreading it across the entire project like glitter in a carpet.
+
+## Activity 6: Deployment, Webhooks, & AI-Testing
+
+### Prompt 1
+
+**What I asked:**
+
+> I have a Next.js app with Supabase Auth. Using @workspace context to
+    understand the app structure, write an End-to-End (E2E) test file at
+    tests/auth.spec.ts using Playwright.
+
+    The tests should verify:
+
+    1. LOGIN PAGE VISIBLE: Navigate to /login and confirm the login form
+    is visible (check for email input, password input, and submit button).
+
+    2. REDIRECT AFTER LOGIN: After a successful login with valid credentials,
+    the user is redirected to the dashboard or projects page.
+
+    3. SIDEBAR NAVIGATION: After login, verify that the sidebar navigation
+    links are visible: "Overview", "Projects", and "Settings".
+
+    Requirements:
+    - Use role-based locators (getByRole, getByLabel, getByText) instead of
+    CSS selectors or test IDs. This makes tests more accessible and resilient
+    to UI changes.
+    - Add clear test descriptions that explain what each test verifies.
+    - Handle the async nature of navigation and page loads with proper
+    Playwright waiting strategies.
+    - Read test credentials from process.env.TEST_USER_EMAIL and
+    process.env.TEST_USER_PASSWORD. Do not hardcode credentials. If those
+    variables are not set, the credentialed tests should skip with a clear
+    message rather than fail.
+
+
+**What happened:**
+
+> (Did the Agent use role-based locators? Did it understand the auth
+> flow from your workspace context? Did the tests pass on the first run?)
+
+    The agent understood the flow and tests passed on the first go around.
+
+### Prompt 2
+
+**What I asked:**
+
+> There was only one prompt given. Anything else said to the agent was simply giving permission to continue with the task it was given as it would stop periodically and ask if I approved of its current plans and what it has done..
+
+**What happened:**
+
+    After being told it was okay to proceed, the agent would continue on its task.
+
+### Reflection
+
+> How does having an AI write and run tests change your confidence in
+> "hitting the deploy button"? Did the Agent catch anything you would
+> have missed? How does this compare to manually testing in the browser?
+
+    My confidence goes down, not because I don't trust the code, I looked over it so I know that It is okay and I have tested it before deployment but the issue comes in when I think about how little I was actually needed. I make mistakes, my eyes get tired, I lose focus, the agent doesn't and before an error had any chance to cause any real issues, its already taken care of. This raises red flags in my head because I can see that once my permission to proceed can be written into reliable code, I wont be needed anymore, feels like I'm babysitting until my replacement can decide for itself whether or not it has made the best decision.
+
+### Course Reflection
+
+> Look back at your complete PROMPTS.md from Activity 1 to Activity 6.
+> How has your prompting strategy evolved? What do you do differently
+> now compared to your first prompt in Activity 1? What is the most
+> important thing you learned about working with AI coding tools?
+
+    I learned that even if your prompts aren't perfect as long as you understand what it is that you're trying to accomplish, the agent can make that happen. I have taken the lessons outside of this class and started using this to do other projects as well, my prompts are not ideal half of the time but even if I don't know what to do I can ask the agent and it will work with me to get the job done. If we are being honest, this class shifted my focus, I started out believing my field was secure but over the course of my degree I have watched AI go from just a chatbot that could barely answer coding questions to a junior developer able to read write and test your programs for you and all you need to do is give it your ideas. I have started the process of shifting my focus into engineering with the goal of being a mechatronics engineer. I love what it is able to do and I think it is a useful tool, i just think they're moving it along faster than we the people and the planet are ready for but that's above my pay grade, and I don't think they intend on keeping people around for long. I'm sure they're already trying to figure out how to create the senior developer to guide this one. I have taken time to look into some of the people leading the race of Ai/ big tech in general and these people have so much disdain for everyday people I don't see how this ends well for the public.
